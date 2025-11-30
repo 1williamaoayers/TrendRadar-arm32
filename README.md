@@ -46,7 +46,7 @@ wget https://raw.githubusercontent.com/sansan0/TrendRadar/master/config/frequenc
 docker run -d --name trend-radar \
   -v $(pwd)/config:/app/config \
   -v $(pwd)/output:/app/output \
-  wantcat/trendradar:latest
+  ghcr.io/1williamaoayers/trendradar-arm32:latest
 ```
 
 ### 2. ✨ 进入管理工具 (核心功能)

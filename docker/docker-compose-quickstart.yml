@@ -2,7 +2,7 @@ version: '3'
 services:
   trend-radar:
     # 支持 amd64, arm64, armv7 (玩客云等32位设备)
-    image: wantcat/trendradar:latest
+    image: ghcr.io/1williamaoayers/trendradar-arm32:latest
     container_name: trend-radar
     restart: unless-stopped
     environment:

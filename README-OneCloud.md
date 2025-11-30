@@ -16,7 +16,7 @@ mkdir -p trendradar && docker run -d \
   -e IMMEDIATE_RUN=true \
   -v $(pwd)/trendradar/config:/app/config \
   -v $(pwd)/trendradar/output:/app/output \
-  wantcat/trendradar:latest
+  ghcr.io/1williamaoayers/trendradar-arm32:latest
 ```
 
 ## 🛠️ 如何管理与配置？（新功能）

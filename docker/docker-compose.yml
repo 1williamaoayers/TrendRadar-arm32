@@ -1,6 +1,6 @@
 services:
   trend-radar:
-    image: wantcat/trendradar:latest
+    image: ghcr.io/1williamaoayers/trendradar-arm32:latest
     container_name: trend-radar
     restart: unless-stopped
 
