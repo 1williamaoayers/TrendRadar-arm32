@@ -57,6 +57,7 @@ RUN set -ex && \
     rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
+# Install build dependencies for ARM architecture and common tools
 RUN apt-get update && \
     apt-get install -y --no-install-recommends build-essential python3-dev nano && \
     pip install --no-cache-dir -r requirements.txt && \
