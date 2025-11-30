@@ -73,7 +73,7 @@ docker exec -it trend-radar python manage.py
 请输入选项 [0-5]: 
 ```
 
-**通过这个菜单，你可以：**
+**💡 通过这个菜单，你可以轻松完成：**
 *   **修改抓取频率**：支持 30分钟、1小时、6小时、8小时、12小时 或 每天固定时间。
 *   **管理关键词**：分组添加/删除你关心的热点关键词（如：`AI`, `华为`, `!广告`）。
 *   **管理监控平台**：输入 `weibo` 自动联想为 `微博`，轻松增删监控源。
@@ -104,4 +104,4 @@ docker exec -it trend-radar python manage.py
 
 本项目基于 [TrendRadar](https://github.com/sansan0/TrendRadar) 开发，感谢原作者 [sansan0](https://github.com/sansan0) 的开源贡献。
 
-如有使用问题，欢迎提交 Issue 反馈。
+如有使用问题或建议，欢迎提交 Issue 反馈。
