@@ -1,0 +1,20 @@
+version: '3'
+services:
+  trend-radar:
+    # 支持 amd64, arm64, armv7 (玩客云等32位设备)
+    image: wantcat/trendradar:latest
+    container_name: trend-radar
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+      # 运行模式: cron (定时任务) 或 once (单次运行)
+      - RUN_MODE=cron
+      # 定时规则: 每30分钟运行一次
+      - CRON_SCHEDULE=*/30 * * * *
+      # 启动时是否立即运行一次
+      - IMMEDIATE_RUN=true
+    volumes:
+      # 配置文件目录 (首次运行时会自动生成默认配置)
+      - ./config:/app/config
+      # 数据输出目录
+      - ./output:/app/output

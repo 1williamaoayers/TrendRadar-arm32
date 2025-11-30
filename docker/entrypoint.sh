@@ -1,10 +1,28 @@
 #!/bin/bash
 set -e
 
-# 检查配置文件
-if [ ! -f "/app/config/config.yaml" ] || [ ! -f "/app/config/frequency_words.txt" ]; then
-    echo "❌ 配置文件缺失"
-    exit 1
+# 检查并初始化配置文件
+if [ ! -d "/app/config" ]; then
+    mkdir -p /app/config
+fi
+
+if [ ! -f "/app/config/config.yaml" ]; then
+    echo "⚠️ config.yaml 不存在，使用默认配置..."
+    if [ -f "/app/defaults/config.yaml" ]; then
+        cp /app/defaults/config.yaml /app/config/config.yaml
+    else
+        echo "❌ 默认配置文件缺失"
+        exit 1
+    fi
+fi
+
+if [ ! -f "/app/config/frequency_words.txt" ]; then
+    echo "⚠️ frequency_words.txt 不存在，使用默认配置..."
+    if [ -f "/app/defaults/frequency_words.txt" ]; then
+        cp /app/defaults/frequency_words.txt /app/config/frequency_words.txt
+    else
+        touch /app/config/frequency_words.txt
+    fi
 fi
 
 # 保存环境变量
@@ -17,9 +35,18 @@ case "${RUN_MODE:-cron}" in
     ;;
 "cron")
     # 生成 crontab
-    echo "${CRON_SCHEDULE:-*/30 * * * *} cd /app && /usr/local/bin/python main.py" > /tmp/crontab
+    # 优先使用持久化的配置文件，如果不存在则从环境变量生成
+    if [ -f "/app/config/crontab" ]; then
+        echo "📅 加载持久化 crontab 配置 (/app/config/crontab)..."
+        cp /app/config/crontab /tmp/crontab
+    else
+        echo "📅 初始化 crontab (从环境变量)..."
+        echo "${CRON_SCHEDULE:-*/30 * * * *} cd /app && /usr/local/bin/python main.py" > /tmp/crontab
+        # 备份一份到 config 目录，供 manage.py 管理使用
+        cp /tmp/crontab /app/config/crontab
+    fi
     
-    echo "📅 生成的crontab内容:"
+    echo "📋 当前生效的 crontab 内容:"
     cat /tmp/crontab
 
     if ! /usr/local/bin/supercronic -test /tmp/crontab; then
