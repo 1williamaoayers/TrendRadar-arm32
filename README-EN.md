@@ -1429,7 +1429,7 @@ docker run -d --name trend-radar \
   -e CRON_SCHEDULE="*/30 * * * *" \
   -e RUN_MODE="cron" \
   -e IMMEDIATE_RUN="true" \
-  wantcat/trendradar:latest
+  ghcr.io/1williamaoayers/trendradar-arm32:latest
 ```
 
 #### Method 2: Using docker-compose (Recommended)
@@ -1529,7 +1529,7 @@ docker-compose up -d
 
 ```bash
 # Method 1: Manual update
-docker pull wantcat/trendradar:latest
+docker pull ghcr.io/1williamaoayers/trendradar-arm32:latest
 docker-compose down
 docker-compose up -d
 

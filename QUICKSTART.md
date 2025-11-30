@@ -16,7 +16,7 @@ mkdir -p trendradar && docker run -d \
   -e IMMEDIATE_RUN=true \
   -v $(pwd)/trendradar/config:/app/config \
   -v $(pwd)/trendradar/output:/app/output \
-  wantcat/trendradar:latest
+  ghcr.io/1williamaoayers/trendradar-arm32:latest
 ```
 
 运行后，程序会自动在当前目录创建 `trendradar` 文件夹，并在其中生成默认配置文件。
@@ -37,7 +37,7 @@ New-Item -ItemType Directory -Force -Path trendradar; docker run -d `
   -e IMMEDIATE_RUN=true `
   -v ${PWD}/trendradar/config:/app/config `
   -v ${PWD}/trendradar/output:/app/output `
-  wantcat/trendradar:latest
+  ghcr.io/1williamaoayers/trendradar-arm32:latest
 ```
 
 ---
