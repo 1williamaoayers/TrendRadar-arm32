@@ -58,10 +58,12 @@ RUN set -ex && \
 
 COPY requirements.txt .
 # Install build dependencies for ARM architecture and common tools
+# We use piwheels to get pre-compiled binaries for ARM to avoid long build times
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends build-essential python3-dev nano && \
-    pip install --no-cache-dir -r requirements.txt && \
-    apt-get purge -y --auto-remove build-essential python3-dev && \
+    apt-get install -y --no-install-recommends build-essential python3-dev nano libffi-dev libssl-dev && \
+    pip install --upgrade pip && \
+    pip install --no-cache-dir --extra-index-url https://www.piwheels.org/simple -r requirements.txt && \
+    apt-get purge -y --auto-remove build-essential python3-dev libffi-dev libssl-dev && \
     rm -rf /var/lib/apt/lists/*
 
 COPY main.py .
