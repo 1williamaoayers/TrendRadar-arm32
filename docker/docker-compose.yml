@@ -1,5 +1,6 @@
 services:
   trend-radar:
+    # 使用 ghcr.io 镜像源
     image: ghcr.io/1williamaoayers/trendradar-arm32:latest
     container_name: trend-radar
     restart: unless-stopped
